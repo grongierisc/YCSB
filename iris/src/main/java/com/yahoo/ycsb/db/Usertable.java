@@ -45,6 +45,7 @@ public class Usertable {
         String tValue = value.getValue().toString();
         field.setAccessible(true);
         field.set(this, tValue);
+
       } catch (Exception e) {
         e.printStackTrace();
       }

@@ -74,7 +74,12 @@ public class IrisXEPClient extends DB {
   public Status read(String table, String key, Set<String> fields, Map<String, ByteIterator> result) {
     try {
 
-      System.out.println("Read");
+      EventQueryIterator<Usertable> myIter = returnOneByKey(table, key);
+      
+      if (!myIter.hasNext()) {
+        return Status.NOT_FOUND;
+      }
+
       return Status.OK;
     } catch (Exception e) {
       System.err.println(e);
@@ -96,7 +101,13 @@ public class IrisXEPClient extends DB {
   public Status update(String table, String key, Map<String, ByteIterator> values) {
     try {
 
-      System.out.println("Update");
+      EventQueryIterator<Usertable> myIter = returnOneByKey(table, key);
+      
+      if (myIter.hasNext()) {
+        Usertable eventItems = new Usertable(key, values);
+        myIter.set(eventItems);
+      }
+
       return Status.OK;
     } catch (Exception e) {
       System.err.println(e);
@@ -108,7 +119,9 @@ public class IrisXEPClient extends DB {
     try {
 
       Usertable eventItems = new Usertable(key, values);
-      System.out.println(event.store(eventItems));
+      
+      event.store(eventItems);
+
       return Status.OK;
     } catch (Exception e) {
       System.err.println(e);
@@ -118,22 +131,48 @@ public class IrisXEPClient extends DB {
 
   public Status delete(String table, String key) {
     try {
-      System.out.println("Delete");
+      
+      EventQueryIterator<Usertable> myIter = returnOneByKey(table, key);
+      
+      if (myIter.hasNext()) {
+        myIter.remove();
+      }
       return Status.OK;
     } catch (Exception e) {
       System.err.println(e);
       return Status.ERROR;
     }
   }
+  
+  private EventQueryIterator<Usertable> returnOneByKey(String table, String key){
 
+    StringBuilder read = new StringBuilder("SELECT * FROM ");
+    read.append("com_yahoo_ycsb_db.Usertable ");
+    read.append(" WHERE ");
+    read.append(" key ");
+    read.append(" = ");
+    read.append("?");
 
-  private void getFieldInfo(Map<String, ByteIterator> values) {
+    try {
 
-    for (Map.Entry<String, ByteIterator> entry : values.entrySet()) {
-      System.out.println(entry.getKey());
-      System.out.println(entry.getValue().toString());
+      event = this.xepPersister.getEvent("com.yahoo.ycsb.db.Usertable");
+      
+      EventQuery<Usertable> myQuery = event.createQuery(" SELECT * FROM com_yahoo_ycsb_db.Usertable WHERE key = ? ");
+     
+      myQuery.setParameter(1, key); 
+      myQuery.execute();
+      
+      return myQuery.getIterator();
+    
+    } catch (Exception e) {
+      System.err.println(e);
+      return null;
     }
+    
+    
+
   }
+
 }
 
 
