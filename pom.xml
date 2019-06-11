@@ -147,6 +147,7 @@ LICENSE file.
     <module>hypertable</module>
     <module>ignite</module>
     <module>infinispan</module>
+    <module>iris</module>
     <module>jdbc</module>
     <module>kudu</module>
     <!--<module>mapkeeper</module>-->
