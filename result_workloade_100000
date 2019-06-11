@@ -1,0 +1,456 @@
+[0;36mTesting with Maria LOCAL[0m
+Command  "truncate table usertable" successfully executed.
+Closing database connection.
+Adding shard node URL: jdbc:mariadb://localhost:3306/test
+Adding shard node URL: jdbc:mariadb://localhost:3306/test
+Adding shard node URL: jdbc:mariadb://localhost:3306/test
+Adding shard node URL: jdbc:mariadb://localhost:3306/test
+Using shards: 1, batchSize:-1, fetchSize: -1
+Using shards: 1, batchSize:-1, fetchSize: -1
+Using shards: 1, batchSize:-1, fetchSize: -1
+Using shards: 1, batchSize:-1, fetchSize: -1
+[OVERALL], RunTime(ms), 8666
+[OVERALL], Throughput(ops/sec), 11539.349180706207
+[TOTAL_GCS_PS_Scavenge], Count, 18
+[TOTAL_GC_TIME_PS_Scavenge], Time(ms), 17
+[TOTAL_GC_TIME_%_PS_Scavenge], Time(%), 0.19616893607200553
+[TOTAL_GCS_PS_MarkSweep], Count, 0
+[TOTAL_GC_TIME_PS_MarkSweep], Time(ms), 0
+[TOTAL_GC_TIME_%_PS_MarkSweep], Time(%), 0.0
+[TOTAL_GCs], Count, 18
+[TOTAL_GC_TIME], Time(ms), 17
+[TOTAL_GC_TIME_%], Time(%), 0.19616893607200553
+[CLEANUP], Operations, 4
+[CLEANUP], AverageLatency(us), 336.75
+[CLEANUP], MinLatency(us), 48
+[CLEANUP], MaxLatency(us), 1202
+[CLEANUP], 95thPercentileLatency(us), 1202
+[CLEANUP], 99thPercentileLatency(us), 1202
+[INSERT], Operations, 100000
+[INSERT], AverageLatency(us), 338.57433
+[INSERT], MinLatency(us), 132
+[INSERT], MaxLatency(us), 62079
+[INSERT], 95thPercentileLatency(us), 439
+[INSERT], 99thPercentileLatency(us), 841
+[INSERT], Return=OK, 100000
+Adding shard node URL: jdbc:mariadb://localhost:3306/test
+Adding shard node URL: jdbc:mariadb://localhost:3306/test
+Adding shard node URL: jdbc:mariadb://localhost:3306/test
+Adding shard node URL: jdbc:mariadb://localhost:3306/test
+Using shards: 1, batchSize:-1, fetchSize: -1
+Using shards: 1, batchSize:-1, fetchSize: -1
+Using shards: 1, batchSize:-1, fetchSize: -1
+Using shards: 1, batchSize:-1, fetchSize: -1
+[OVERALL], RunTime(ms), 307
+[OVERALL], Throughput(ops/sec), 3257.328990228013
+[TOTAL_GCS_PS_Scavenge], Count, 1
+[TOTAL_GC_TIME_PS_Scavenge], Time(ms), 2
+[TOTAL_GC_TIME_%_PS_Scavenge], Time(%), 0.6514657980456027
+[TOTAL_GCS_PS_MarkSweep], Count, 0
+[TOTAL_GC_TIME_PS_MarkSweep], Time(ms), 0
+[TOTAL_GC_TIME_%_PS_MarkSweep], Time(%), 0.0
+[TOTAL_GCs], Count, 1
+[TOTAL_GC_TIME], Time(ms), 2
+[TOTAL_GC_TIME_%], Time(%), 0.6514657980456027
+[CLEANUP], Operations, 4
+[CLEANUP], AverageLatency(us), 810.25
+[CLEANUP], MinLatency(us), 99
+[CLEANUP], MaxLatency(us), 2267
+[CLEANUP], 95thPercentileLatency(us), 2267
+[CLEANUP], 99thPercentileLatency(us), 2267
+[INSERT], Operations, 43
+[INSERT], AverageLatency(us), 816.0697674418604
+[INSERT], MinLatency(us), 364
+[INSERT], MaxLatency(us), 5123
+[INSERT], 95thPercentileLatency(us), 1898
+[INSERT], 99thPercentileLatency(us), 5123
+[INSERT], Return=OK, 43
+[SCAN], Operations, 957
+[SCAN], AverageLatency(us), 679.2173458725183
+[SCAN], MinLatency(us), 175
+[SCAN], MaxLatency(us), 12871
+[SCAN], 95thPercentileLatency(us), 1702
+[SCAN], 99thPercentileLatency(us), 5271
+[SCAN], Return=OK, 957
+[0;36mTesting with Maria DOCKER[0m
+Command  "truncate table usertable" successfully executed.
+Closing database connection.
+Adding shard node URL: jdbc:mariadb://localhost:3307/test
+Adding shard node URL: jdbc:mariadb://localhost:3307/test
+Adding shard node URL: jdbc:mariadb://localhost:3307/test
+Adding shard node URL: jdbc:mariadb://localhost:3307/test
+Using shards: 1, batchSize:-1, fetchSize: -1
+Using shards: 1, batchSize:-1, fetchSize: -1
+Using shards: 1, batchSize:-1, fetchSize: -1
+Using shards: 1, batchSize:-1, fetchSize: -1
+[OVERALL], RunTime(ms), 46854
+[OVERALL], Throughput(ops/sec), 2134.2894950271057
+[TOTAL_GCS_PS_Scavenge], Count, 18
+[TOTAL_GC_TIME_PS_Scavenge], Time(ms), 20
+[TOTAL_GC_TIME_%_PS_Scavenge], Time(%), 0.04268578990054211
+[TOTAL_GCS_PS_MarkSweep], Count, 0
+[TOTAL_GC_TIME_PS_MarkSweep], Time(ms), 0
+[TOTAL_GC_TIME_%_PS_MarkSweep], Time(%), 0.0
+[TOTAL_GCs], Count, 18
+[TOTAL_GC_TIME], Time(ms), 20
+[TOTAL_GC_TIME_%], Time(%), 0.04268578990054211
+[CLEANUP], Operations, 4
+[CLEANUP], AverageLatency(us), 975.5
+[CLEANUP], MinLatency(us), 734
+[CLEANUP], MaxLatency(us), 1560
+[CLEANUP], 95thPercentileLatency(us), 1560
+[CLEANUP], 99thPercentileLatency(us), 1560
+[INSERT], Operations, 100000
+[INSERT], AverageLatency(us), 1862.26669
+[INSERT], MinLatency(us), 914
+[INSERT], MaxLatency(us), 195455
+[INSERT], 95thPercentileLatency(us), 2609
+[INSERT], 99thPercentileLatency(us), 3619
+[INSERT], Return=OK, 100000
+Adding shard node URL: jdbc:mariadb://localhost:3307/test
+Adding shard node URL: jdbc:mariadb://localhost:3307/test
+Adding shard node URL: jdbc:mariadb://localhost:3307/test
+Adding shard node URL: jdbc:mariadb://localhost:3307/test
+Using shards: 1, batchSize:-1, fetchSize: -1
+Using shards: 1, batchSize:-1, fetchSize: -1
+Using shards: 1, batchSize:-1, fetchSize: -1
+Using shards: 1, batchSize:-1, fetchSize: -1
+[OVERALL], RunTime(ms), 728
+[OVERALL], Throughput(ops/sec), 1373.6263736263736
+[TOTAL_GCS_PS_Scavenge], Count, 1
+[TOTAL_GC_TIME_PS_Scavenge], Time(ms), 2
+[TOTAL_GC_TIME_%_PS_Scavenge], Time(%), 0.27472527472527475
+[TOTAL_GCS_PS_MarkSweep], Count, 0
+[TOTAL_GC_TIME_PS_MarkSweep], Time(ms), 0
+[TOTAL_GC_TIME_%_PS_MarkSweep], Time(%), 0.0
+[TOTAL_GCs], Count, 1
+[TOTAL_GC_TIME], Time(ms), 2
+[TOTAL_GC_TIME_%], Time(%), 0.27472527472527475
+[CLEANUP], Operations, 4
+[CLEANUP], AverageLatency(us), 1321.0
+[CLEANUP], MinLatency(us), 818
+[CLEANUP], MaxLatency(us), 2711
+[CLEANUP], 95thPercentileLatency(us), 2711
+[CLEANUP], 99thPercentileLatency(us), 2711
+[INSERT], Operations, 50
+[INSERT], AverageLatency(us), 2988.86
+[INSERT], MinLatency(us), 1382
+[INSERT], MaxLatency(us), 9983
+[INSERT], 95thPercentileLatency(us), 4411
+[INSERT], 99thPercentileLatency(us), 9983
+[INSERT], Return=OK, 50
+[SCAN], Operations, 950
+[SCAN], AverageLatency(us), 2318.9705263157894
+[SCAN], MinLatency(us), 758
+[SCAN], MaxLatency(us), 15951
+[SCAN], 95thPercentileLatency(us), 4335
+[SCAN], 99thPercentileLatency(us), 6467
+[SCAN], Return=OK, 950
+[0;36mTesting with Intersystems IRIS LOCAL[0m
+Command  "truncate table usertable" successfully executed.
+Closing database connection.
+Adding shard node URL: jdbc:IRIS://localhost:51773/USER
+Adding shard node URL: jdbc:IRIS://localhost:51773/USER
+Adding shard node URL: jdbc:IRIS://localhost:51773/USER
+Adding shard node URL: jdbc:IRIS://localhost:51773/USER
+Using shards: 1, batchSize:-1, fetchSize: -1
+Using shards: 1, batchSize:-1, fetchSize: -1
+Using shards: 1, batchSize:-1, fetchSize: -1
+Using shards: 1, batchSize:-1, fetchSize: -1
+[OVERALL], RunTime(ms), 3842
+[OVERALL], Throughput(ops/sec), 26028.110359187922
+[TOTAL_GCS_PS_Scavenge], Count, 24
+[TOTAL_GC_TIME_PS_Scavenge], Time(ms), 20
+[TOTAL_GC_TIME_%_PS_Scavenge], Time(%), 0.5205622071837585
+[TOTAL_GCS_PS_MarkSweep], Count, 0
+[TOTAL_GC_TIME_PS_MarkSweep], Time(ms), 0
+[TOTAL_GC_TIME_%_PS_MarkSweep], Time(%), 0.0
+[TOTAL_GCs], Count, 24
+[TOTAL_GC_TIME], Time(ms), 20
+[TOTAL_GC_TIME_%], Time(%), 0.5205622071837585
+[CLEANUP], Operations, 4
+[CLEANUP], AverageLatency(us), 5811.0
+[CLEANUP], MinLatency(us), 5308
+[CLEANUP], MaxLatency(us), 6191
+[CLEANUP], 95thPercentileLatency(us), 6191
+[CLEANUP], 99thPercentileLatency(us), 6191
+[INSERT], Operations, 100000
+[INSERT], AverageLatency(us), 145.28907
+[INSERT], MinLatency(us), 37
+[INSERT], MaxLatency(us), 54367
+[INSERT], 95thPercentileLatency(us), 264
+[INSERT], 99thPercentileLatency(us), 345
+[INSERT], Return=OK, 100000
+Adding shard node URL: jdbc:IRIS://localhost:51773/USER
+Adding shard node URL: jdbc:IRIS://localhost:51773/USER
+Adding shard node URL: jdbc:IRIS://localhost:51773/USER
+Adding shard node URL: jdbc:IRIS://localhost:51773/USER
+Using shards: 1, batchSize:-1, fetchSize: -1
+Using shards: 1, batchSize:-1, fetchSize: -1
+Using shards: 1, batchSize:-1, fetchSize: -1
+Using shards: 1, batchSize:-1, fetchSize: -1
+[OVERALL], RunTime(ms), 955
+[OVERALL], Throughput(ops/sec), 1047.1204188481674
+[TOTAL_GCS_PS_Scavenge], Count, 0
+[TOTAL_GC_TIME_PS_Scavenge], Time(ms), 0
+[TOTAL_GC_TIME_%_PS_Scavenge], Time(%), 0.0
+[TOTAL_GCS_PS_MarkSweep], Count, 0
+[TOTAL_GC_TIME_PS_MarkSweep], Time(ms), 0
+[TOTAL_GC_TIME_%_PS_MarkSweep], Time(%), 0.0
+[TOTAL_GCs], Count, 0
+[TOTAL_GC_TIME], Time(ms), 0
+[TOTAL_GC_TIME_%], Time(%), 0.0
+[SCAN-FAILED], Operations, 946
+[SCAN-FAILED], AverageLatency(us), 3571.3636363636365
+[SCAN-FAILED], MinLatency(us), 802
+[SCAN-FAILED], MaxLatency(us), 63711
+[SCAN-FAILED], 95thPercentileLatency(us), 5803
+[SCAN-FAILED], 99thPercentileLatency(us), 6387
+[CLEANUP], Operations, 4
+[CLEANUP], AverageLatency(us), 5508.0
+[CLEANUP], MinLatency(us), 5260
+[CLEANUP], MaxLatency(us), 6111
+[CLEANUP], 95thPercentileLatency(us), 6111
+[CLEANUP], 99thPercentileLatency(us), 6111
+[INSERT], Operations, 54
+[INSERT], AverageLatency(us), 491.3333333333333
+[INSERT], MinLatency(us), 195
+[INSERT], MaxLatency(us), 6183
+[INSERT], 95thPercentileLatency(us), 1624
+[INSERT], 99thPercentileLatency(us), 2409
+[INSERT], Return=OK, 54
+[SCAN], Operations, 0
+[SCAN], AverageLatency(us), NaN
+[SCAN], MinLatency(us), 9223372036854775807
+[SCAN], MaxLatency(us), 0
+[SCAN], 95thPercentileLatency(us), 0
+[SCAN], 99thPercentileLatency(us), 0
+[SCAN], Return=ERROR, 946
+[0;36mTesting with Intersystems IRIS DOCKER[0m
+Command  "truncate table usertable" successfully executed.
+Closing database connection.
+Adding shard node URL: jdbc:IRIS://127.0.0.1:9091/USER
+Adding shard node URL: jdbc:IRIS://127.0.0.1:9091/USER
+Adding shard node URL: jdbc:IRIS://127.0.0.1:9091/USER
+Adding shard node URL: jdbc:IRIS://127.0.0.1:9091/USER
+Using shards: 1, batchSize:-1, fetchSize: -1
+Using shards: 1, batchSize:-1, fetchSize: -1
+Using shards: 1, batchSize:-1, fetchSize: -1
+Using shards: 1, batchSize:-1, fetchSize: -1
+[OVERALL], RunTime(ms), 22573
+[OVERALL], Throughput(ops/sec), 4430.071324148319
+[TOTAL_GCS_PS_Scavenge], Count, 24
+[TOTAL_GC_TIME_PS_Scavenge], Time(ms), 22
+[TOTAL_GC_TIME_%_PS_Scavenge], Time(%), 0.09746156913126301
+[TOTAL_GCS_PS_MarkSweep], Count, 0
+[TOTAL_GC_TIME_PS_MarkSweep], Time(ms), 0
+[TOTAL_GC_TIME_%_PS_MarkSweep], Time(%), 0.0
+[TOTAL_GCs], Count, 24
+[TOTAL_GC_TIME], Time(ms), 22
+[TOTAL_GC_TIME_%], Time(%), 0.09746156913126301
+[CLEANUP], Operations, 4
+[CLEANUP], AverageLatency(us), 195.0
+[CLEANUP], MinLatency(us), 39
+[CLEANUP], MaxLatency(us), 660
+[CLEANUP], 95thPercentileLatency(us), 660
+[CLEANUP], 99thPercentileLatency(us), 660
+[INSERT], Operations, 100000
+[INSERT], AverageLatency(us), 894.90457
+[INSERT], MinLatency(us), 357
+[INSERT], MaxLatency(us), 144127
+[INSERT], 95thPercentileLatency(us), 1265
+[INSERT], 99thPercentileLatency(us), 1753
+[INSERT], Return=OK, 100000
+Adding shard node URL: jdbc:IRIS://127.0.0.1:9091/USER
+Adding shard node URL: jdbc:IRIS://127.0.0.1:9091/USER
+Adding shard node URL: jdbc:IRIS://127.0.0.1:9091/USER
+Adding shard node URL: jdbc:IRIS://127.0.0.1:9091/USER
+Using shards: 1, batchSize:-1, fetchSize: -1
+Using shards: 1, batchSize:-1, fetchSize: -1
+Using shards: 1, batchSize:-1, fetchSize: -1
+Using shards: 1, batchSize:-1, fetchSize: -1
+[OVERALL], RunTime(ms), 1088
+[OVERALL], Throughput(ops/sec), 919.1176470588235
+[TOTAL_GCS_PS_Scavenge], Count, 0
+[TOTAL_GC_TIME_PS_Scavenge], Time(ms), 0
+[TOTAL_GC_TIME_%_PS_Scavenge], Time(%), 0.0
+[TOTAL_GCS_PS_MarkSweep], Count, 0
+[TOTAL_GC_TIME_PS_MarkSweep], Time(ms), 0
+[TOTAL_GC_TIME_%_PS_MarkSweep], Time(%), 0.0
+[TOTAL_GCs], Count, 0
+[TOTAL_GC_TIME], Time(ms), 0
+[TOTAL_GC_TIME_%], Time(%), 0.0
+[SCAN-FAILED], Operations, 948
+[SCAN-FAILED], AverageLatency(us), 4150.226793248945
+[SCAN-FAILED], MinLatency(us), 2012
+[SCAN-FAILED], MaxLatency(us), 46399
+[SCAN-FAILED], 95thPercentileLatency(us), 5259
+[SCAN-FAILED], 99thPercentileLatency(us), 6363
+[CLEANUP], Operations, 4
+[CLEANUP], AverageLatency(us), 164.0
+[CLEANUP], MinLatency(us), 34
+[CLEANUP], MaxLatency(us), 540
+[CLEANUP], 95thPercentileLatency(us), 540
+[CLEANUP], 99thPercentileLatency(us), 540
+[INSERT], Operations, 52
+[INSERT], AverageLatency(us), 1281.673076923077
+[INSERT], MinLatency(us), 738
+[INSERT], MaxLatency(us), 5695
+[INSERT], 95thPercentileLatency(us), 2885
+[INSERT], 99thPercentileLatency(us), 4091
+[INSERT], Return=OK, 52
+[SCAN], Operations, 0
+[SCAN], AverageLatency(us), NaN
+[SCAN], MinLatency(us), 9223372036854775807
+[SCAN], MaxLatency(us), 0
+[SCAN], 95thPercentileLatency(us), 0
+[SCAN], 99thPercentileLatency(us), 0
+[SCAN], Return=ERROR, 948
+[0;36mTesting with PostgreSQL LOCAL[0m
+Command  "truncate table usertable" successfully executed.
+Closing database connection.
+Adding shard node URL: jdbc:postgresql://localhost:5432/postgres
+Adding shard node URL: jdbc:postgresql://localhost:5432/postgres
+Adding shard node URL: jdbc:postgresql://localhost:5432/postgres
+Adding shard node URL: jdbc:postgresql://localhost:5432/postgres
+Using shards: 1, batchSize:-1, fetchSize: -1
+Using shards: 1, batchSize:-1, fetchSize: -1
+Using shards: 1, batchSize:-1, fetchSize: -1
+Using shards: 1, batchSize:-1, fetchSize: -1
+[OVERALL], RunTime(ms), 5027
+[OVERALL], Throughput(ops/sec), 19892.58006763477
+[TOTAL_GCS_PS_Scavenge], Count, 29
+[TOTAL_GC_TIME_PS_Scavenge], Time(ms), 20
+[TOTAL_GC_TIME_%_PS_Scavenge], Time(%), 0.3978516013526954
+[TOTAL_GCS_PS_MarkSweep], Count, 0
+[TOTAL_GC_TIME_PS_MarkSweep], Time(ms), 0
+[TOTAL_GC_TIME_%_PS_MarkSweep], Time(%), 0.0
+[TOTAL_GCs], Count, 29
+[TOTAL_GC_TIME], Time(ms), 20
+[TOTAL_GC_TIME_%], Time(%), 0.3978516013526954
+[CLEANUP], Operations, 4
+[CLEANUP], AverageLatency(us), 169.5
+[CLEANUP], MinLatency(us), 39
+[CLEANUP], MaxLatency(us), 538
+[CLEANUP], 95thPercentileLatency(us), 538
+[CLEANUP], 99thPercentileLatency(us), 538
+[INSERT], Operations, 100000
+[INSERT], AverageLatency(us), 194.07972
+[INSERT], MinLatency(us), 89
+[INSERT], MaxLatency(us), 13135
+[INSERT], 95thPercentileLatency(us), 276
+[INSERT], 99thPercentileLatency(us), 513
+[INSERT], Return=OK, 100000
+Adding shard node URL: jdbc:postgresql://localhost:5432/postgres
+Adding shard node URL: jdbc:postgresql://localhost:5432/postgres
+Adding shard node URL: jdbc:postgresql://localhost:5432/postgres
+Adding shard node URL: jdbc:postgresql://localhost:5432/postgres
+Using shards: 1, batchSize:-1, fetchSize: -1
+Using shards: 1, batchSize:-1, fetchSize: -1
+Using shards: 1, batchSize:-1, fetchSize: -1
+Using shards: 1, batchSize:-1, fetchSize: -1
+[OVERALL], RunTime(ms), 242
+[OVERALL], Throughput(ops/sec), 4132.231404958678
+[TOTAL_GCS_PS_Scavenge], Count, 1
+[TOTAL_GC_TIME_PS_Scavenge], Time(ms), 2
+[TOTAL_GC_TIME_%_PS_Scavenge], Time(%), 0.8264462809917356
+[TOTAL_GCS_PS_MarkSweep], Count, 0
+[TOTAL_GC_TIME_PS_MarkSweep], Time(ms), 0
+[TOTAL_GC_TIME_%_PS_MarkSweep], Time(%), 0.0
+[TOTAL_GCs], Count, 1
+[TOTAL_GC_TIME], Time(ms), 2
+[TOTAL_GC_TIME_%], Time(%), 0.8264462809917356
+[CLEANUP], Operations, 4
+[CLEANUP], AverageLatency(us), 251.5
+[CLEANUP], MinLatency(us), 52
+[CLEANUP], MaxLatency(us), 766
+[CLEANUP], 95thPercentileLatency(us), 766
+[CLEANUP], 99thPercentileLatency(us), 766
+[INSERT], Operations, 49
+[INSERT], AverageLatency(us), 729.9387755102041
+[INSERT], MinLatency(us), 350
+[INSERT], MaxLatency(us), 8023
+[INSERT], 95thPercentileLatency(us), 967
+[INSERT], 99thPercentileLatency(us), 8023
+[INSERT], Return=OK, 49
+[SCAN], Operations, 951
+[SCAN], AverageLatency(us), 574.7371188222924
+[SCAN], MinLatency(us), 169
+[SCAN], MaxLatency(us), 16383
+[SCAN], 95thPercentileLatency(us), 884
+[SCAN], 99thPercentileLatency(us), 1209
+[SCAN], Return=OK, 951
+[0;36mTesting with PostgreSQL DOCKER[0m
+Command  "truncate table usertable" successfully executed.
+Closing database connection.
+Adding shard node URL: jdbc:postgresql://localhost:4321/postgres
+Adding shard node URL: jdbc:postgresql://localhost:4321/postgres
+Adding shard node URL: jdbc:postgresql://localhost:4321/postgres
+Adding shard node URL: jdbc:postgresql://localhost:4321/postgres
+Using shards: 1, batchSize:-1, fetchSize: -1
+Using shards: 1, batchSize:-1, fetchSize: -1
+Using shards: 1, batchSize:-1, fetchSize: -1
+Using shards: 1, batchSize:-1, fetchSize: -1
+[OVERALL], RunTime(ms), 40114
+[OVERALL], Throughput(ops/sec), 2492.895248541656
+[TOTAL_GCS_PS_Scavenge], Count, 29
+[TOTAL_GC_TIME_PS_Scavenge], Time(ms), 22
+[TOTAL_GC_TIME_%_PS_Scavenge], Time(%), 0.05484369546791644
+[TOTAL_GCS_PS_MarkSweep], Count, 0
+[TOTAL_GC_TIME_PS_MarkSweep], Time(ms), 0
+[TOTAL_GC_TIME_%_PS_MarkSweep], Time(%), 0.0
+[TOTAL_GCs], Count, 29
+[TOTAL_GC_TIME], Time(ms), 22
+[TOTAL_GC_TIME_%], Time(%), 0.05484369546791644
+[CLEANUP], Operations, 4
+[CLEANUP], AverageLatency(us), 205.75
+[CLEANUP], MinLatency(us), 56
+[CLEANUP], MaxLatency(us), 620
+[CLEANUP], 95thPercentileLatency(us), 620
+[CLEANUP], 99thPercentileLatency(us), 620
+[INSERT], Operations, 100000
+[INSERT], AverageLatency(us), 1596.66325
+[INSERT], MinLatency(us), 761
+[INSERT], MaxLatency(us), 982015
+[INSERT], 95thPercentileLatency(us), 1770
+[INSERT], 99thPercentileLatency(us), 2267
+[INSERT], Return=OK, 100000
+Adding shard node URL: jdbc:postgresql://localhost:4321/postgres
+Adding shard node URL: jdbc:postgresql://localhost:4321/postgres
+Adding shard node URL: jdbc:postgresql://localhost:4321/postgres
+Adding shard node URL: jdbc:postgresql://localhost:4321/postgres
+Using shards: 1, batchSize:-1, fetchSize: -1
+Using shards: 1, batchSize:-1, fetchSize: -1
+Using shards: 1, batchSize:-1, fetchSize: -1
+Using shards: 1, batchSize:-1, fetchSize: -1
+[OVERALL], RunTime(ms), 705
+[OVERALL], Throughput(ops/sec), 1418.4397163120568
+[TOTAL_GCS_PS_Scavenge], Count, 1
+[TOTAL_GC_TIME_PS_Scavenge], Time(ms), 3
+[TOTAL_GC_TIME_%_PS_Scavenge], Time(%), 0.425531914893617
+[TOTAL_GCS_PS_MarkSweep], Count, 0
+[TOTAL_GC_TIME_PS_MarkSweep], Time(ms), 0
+[TOTAL_GC_TIME_%_PS_MarkSweep], Time(%), 0.0
+[TOTAL_GCs], Count, 1
+[TOTAL_GC_TIME], Time(ms), 3
+[TOTAL_GC_TIME_%], Time(%), 0.425531914893617
+[CLEANUP], Operations, 4
+[CLEANUP], AverageLatency(us), 201.25
+[CLEANUP], MinLatency(us), 54
+[CLEANUP], MaxLatency(us), 621
+[CLEANUP], 95thPercentileLatency(us), 621
+[CLEANUP], 99thPercentileLatency(us), 621
+[INSERT], Operations, 58
+[INSERT], AverageLatency(us), 2405.293103448276
+[INSERT], MinLatency(us), 1396
+[INSERT], MaxLatency(us), 6531
+[INSERT], 95thPercentileLatency(us), 3375
+[INSERT], 99thPercentileLatency(us), 3829
+[INSERT], Return=OK, 58
+[SCAN], Operations, 942
+[SCAN], AverageLatency(us), 2373.456475583864
+[SCAN], MinLatency(us), 746
+[SCAN], MaxLatency(us), 16495
+[SCAN], 95thPercentileLatency(us), 3869
+[SCAN], 99thPercentileLatency(us), 5271
+[SCAN], Return=OK, 942

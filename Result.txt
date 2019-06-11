@@ -1,0 +1,135 @@
+Testing with PostgreSQL DOCKER
+
+Loading workload...
+Starting test.
+Adding shard node URL: jdbc:postgresql://localhost:5432/postgres
+Using shards: 1, batchSize:-1, fetchSize: -1
+DBWrapper: report latency for each error is false and specific error codes to track for latency are: []
+[OVERALL], RunTime(ms), 1231
+[OVERALL], Throughput(ops/sec), 812.3476848090983
+
+Loading workload...
+Starting test.
+Adding shard node URL: jdbc:postgresql://localhost:5432/postgres
+Using shards: 1, batchSize:-1, fetchSize: -1
+DBWrapper: report latency for each error is false and specific error codes to track for latency are: []
+[OVERALL], RunTime(ms), 987
+[OVERALL], Throughput(ops/sec), 1013.1712259371834
+
+Testing with Iris DOCKER
+
+Loading workload...
+Starting test.
+Adding shard node URL: jdbc:IRIS://127.0.0.1:9091/USER
+Using shards: 1, batchSize:-1, fetchSize: -1
+DBWrapper: report latency for each error is false and specific error codes to track for latency are: []
+[OVERALL], RunTime(ms), 756
+[OVERALL], Throughput(ops/sec), 1322.7513227513227
+
+Loading workload...
+Starting test.
+Adding shard node URL: jdbc:IRIS://127.0.0.1:9091/USER
+Using shards: 1, batchSize:-1, fetchSize: -1
+DBWrapper: report latency for each error is false and specific error codes to track for latency are: []
+[OVERALL], RunTime(ms), 903
+[OVERALL], Throughput(ops/sec), 1107.4197120708748
+
+Testing with Iris LOCAL
+
+Loading workload...
+Starting test.
+Adding shard node URL: jdbc:IRIS://localhost:51773/USER
+Using shards: 1, batchSize:-1, fetchSize: -1
+DBWrapper: report latency for each error is false and specific error codes to track for latency are: []
+[OVERALL], RunTime(ms), 304
+[OVERALL], Throughput(ops/sec), 3289.4736842105262
+
+Loading workload...
+Starting test.
+Adding shard node URL: jdbc:IRIS://localhost:51773/USER
+Using shards: 1, batchSize:-1, fetchSize: -1
+DBWrapper: report latency for each error is false and specific error codes to track for latency are: []
+[OVERALL], RunTime(ms), 264
+[OVERALL], Throughput(ops/sec), 3787.878787878788
+
+Testing with PostgreSQL LOCAL
+
+Loading workload...
+Starting test.
+Adding shard node URL: jdbc:postgresql://localhost:5432/postgres
+Using shards: 1, batchSize:-1, fetchSize: -1
+DBWrapper: report latency for each error is false and specific error codes to track for latency are: []
+[OVERALL], RunTime(ms), 337
+[OVERALL], Throughput(ops/sec), 2967.359050445104
+
+Loading workload...
+Starting test.
+Adding shard node URL: jdbc:postgresql://localhost:5432/postgres
+Using shards: 1, batchSize:-1, fetchSize: -1
+DBWrapper: report latency for each error is false and specific error codes to track for latency are: []
+[OVERALL], RunTime(ms), 271
+[OVERALL], Throughput(ops/sec), 3690.036900369004
+
+
+------------------------------------------
+Testing with PostgreSQL DOCKER
+[OVERALL], RunTime(ms), 378477
+[OVERALL], Throughput(ops/sec), 2642.1684805153286
+[OVERALL], RunTime(ms), 479
+[OVERALL], Throughput(ops/sec), 2087.6826722338205
+
+Testing with PostgreSQL LOCAL
+[OVERALL], RunTime(ms), 46299
+[OVERALL], Throughput(ops/sec), 21598.738633663794
+[OVERALL], RunTime(ms), 190
+[OVERALL], Throughput(ops/sec), 5263.1578947368425
+
+Testing with Intersystems IRIS DOCKER
+[OVERALL], RunTime(ms), 236742
+[OVERALL], Throughput(ops/sec), 4224.007569421565
+[OVERALL], RunTime(ms), 342
+[OVERALL], Throughput(ops/sec), 2923.9766081871344
+
+Testing with Intersystems IRIS LOCAL
+[OVERALL], RunTime(ms), 29048
+[OVERALL], Throughput(ops/sec), 34425.77802258331
+[OVERALL], RunTime(ms), 190
+[OVERALL], Throughput(ops/sec), 5263.1578947368425
+
+-------------------------------------------------
+
+Testing with Maria LOCAL
+[OVERALL], RunTime(ms), 7359
+[OVERALL], Throughput(ops/sec), 13588.802826470988
+[OVERALL], RunTime(ms), 200
+[OVERALL], Throughput(ops/sec), 5000.0
+
+Testing with Maria DOCKER
+[OVERALL], RunTime(ms), 50432
+[OVERALL], Throughput(ops/sec), 1982.8680203045685
+[OVERALL], RunTime(ms), 524
+[OVERALL], Throughput(ops/sec), 1908.3969465648854
+
+Testing with Intersystems IRIS LOCAL
+[OVERALL], RunTime(ms), 3119
+[OVERALL], Throughput(ops/sec), 32061.55819172812
+[OVERALL], RunTime(ms), 189
+[OVERALL], Throughput(ops/sec), 5291.005291005291
+
+Testing with Intersystems IRIS DOCKER
+[OVERALL], RunTime(ms), 22617
+[OVERALL], Throughput(ops/sec), 4421.452889419464
+[OVERALL], RunTime(ms), 359
+[OVERALL], Throughput(ops/sec), 2785.515320334262
+
+Testing with PostgreSQL LOCAL
+[OVERALL], RunTime(ms), 5449
+[OVERALL], Throughput(ops/sec), 18351.991191044228
+[OVERALL], RunTime(ms), 190
+[OVERALL], Throughput(ops/sec), 5263.1578947368425
+
+Testing with PostgreSQL DOCKER
+[OVERALL], RunTime(ms), 38993
+[OVERALL], Throughput(ops/sec), 2564.562870258764
+[OVERALL], RunTime(ms), 437
+[OVERALL], Throughput(ops/sec), 2288.329519450801
