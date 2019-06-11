@@ -17,7 +17,7 @@ com.yahoo.ycsb.db.JdbcDBCli \
 -threads 4
 
  bin/ycsb run jdbc \
--P  workloads/workloada -p recordcount=100000 \
+-P  workloads/workloada -p operationcount=100000 \
 -P  jdbc-binding/conf/maria_local.properties \
 -cp  jdbc-binding/lib/mariadb-java-client-2.4.1.jar \
 -threads 4
@@ -36,7 +36,7 @@ com.yahoo.ycsb.db.JdbcDBCli \
 -threads 4
 
  bin/ycsb run jdbc \
--P  workloads/workloada -p recordcount=100000 \
+-P  workloads/workloada -p operationcount=100000 \
 -P  jdbc-binding/conf/maria_docker.properties \
 -cp  jdbc-binding/lib/mariadb-java-client-2.4.1.jar \
 -threads 4
@@ -54,7 +54,7 @@ com.yahoo.ycsb.db.JdbcDBCli \
 -threads 4
 
  bin/ycsb run jdbc \
--P  workloads/workloada -p recordcount=100000 \
+-P  workloads/workloada -p operationcount=100000 \
 -P  jdbc-binding/conf/iris_local.properties \
 -cp  jdbc-binding/lib/intersystems-jdbc-3.0.0.jar \
 -threads 4
@@ -71,7 +71,7 @@ com.yahoo.ycsb.db.JdbcDBCli \
 -threads 4
 
  bin/ycsb run jdbc \
--P  workloads/workloada -p recordcount=100000 \
+-P  workloads/workloada -p operationcount=100000 \
 -P  jdbc-binding/conf/iris_docker.properties \
 -cp  jdbc-binding/lib/intersystems-jdbc-3.0.0.jar \
 -threads 4
@@ -88,7 +88,7 @@ com.yahoo.ycsb.db.JdbcDBCli \
 -threads 4
 
  bin/ycsb run jdbc \
--P  workloads/workloada -p recordcount=100000 \
+-P  workloads/workloada -p operationcount=100000 \
 -P  jdbc-binding/conf/postgres_local.properties \
 -cp  jdbc-binding/lib/postgresql-42.2.5.jar \
 -threads 4
@@ -105,7 +105,7 @@ com.yahoo.ycsb.db.JdbcDBCli \
 -threads 4
 
  bin/ycsb run jdbc \
--P  workloads/workloada -p recordcount=100000 \
+-P  workloads/workloada -p operationcount=100000 \
 -P  jdbc-binding/conf/postgres_docker.properties \
 -cp  jdbc-binding/lib/postgresql-42.2.5.jar \
 -threads 4
