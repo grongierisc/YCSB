@@ -2,7 +2,9 @@ package com.yahoo.ycsb.db;
 
 import java.lang.reflect.Field;
 import java.util.Map;
+
 import com.intersystems.xep.annotations.Id;
+
 import com.yahoo.ycsb.ByteIterator;
 
 /**
@@ -19,6 +21,7 @@ import com.yahoo.ycsb.ByteIterator;
  * attributes are of type TEXT. All accesses are through the primary key.
  * Therefore, only one index on the primary key is needed.
  */
+
 public class Usertable {
   @Id(generated=false)
   private String key;

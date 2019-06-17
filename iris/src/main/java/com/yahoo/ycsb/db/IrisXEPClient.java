@@ -21,6 +21,8 @@ import com.yahoo.ycsb.ByteIterator;
 import com.yahoo.ycsb.DB;
 import com.yahoo.ycsb.DBException;
 import com.yahoo.ycsb.Status;
+import com.yahoo.ycsb.StringByteIterator;
+
 
 import com.intersystems.xep.*;
 
@@ -29,13 +31,21 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
 
+
 /**
  * This is a client implementation for IrisXEP.
  */
 public class IrisXEPClient extends DB {
 
+  private static final String COM_YAHOO_YCSB_DB_USERTABLE_TABLE = "com_yahoo_ycsb_db.Usertable";
+  private static final String COM_YAHOO_YCSB_DB_USERTABLE_CLASS = "com.yahoo.ycsb.db.Usertable";
+  private EventQuery<Usertable> myQuery;
+  private EventQuery<Usertable> myQueryScan;
   private EventPersister xepPersister;
   private Event event;
+  private UsertableMaker um;
+  private Class<?> c;
+
   private boolean initialized = false;
 
   public IrisXEPClient() {}
@@ -46,14 +56,21 @@ public class IrisXEPClient extends DB {
         System.err.println("Client connection already initialized.");
         return;
       }
+      
+      um = new UsertableMaker("table", "key", 12);
+      c = um.make();
+      
       xepPersister = PersisterFactory.createPersister();
       xepPersister.connect("127.0.0.1", 51773, "User", "_SYSTEM", "password"); // connect to localhost
 
-      xepPersister.importSchema("com.yahoo.ycsb.db.Usertable");   // import flat schema
-
-      event = this.xepPersister.getEvent("com.yahoo.ycsb.db.Usertable");
+      String cano = c.getName().toString();
+      //if (!xepPersister.isSchemaUpToDate(c)) {
+      xepPersister.importSchema(cano);
+      //}
+      event = xepPersister.getEvent(cano);
       
       System.out.println("Init");
+
       initialized=true;
 
     } catch (Exception e) {
@@ -74,12 +91,14 @@ public class IrisXEPClient extends DB {
   public Status read(String table, String key, Set<String> fields, Map<String, ByteIterator> result) {
     try {
 
-      EventQueryIterator<Usertable> myIter = returnOneByKey(table, key);
+      EventQueryIterator<Usertable> myIter = getIteratorByKey(table, key);
       
       if (!myIter.hasNext()) {
-        return Status.NOT_FOUND;
+        return Status.ERROR;
       }
-
+      
+      myQuery.close();
+      
       return Status.OK;
     } catch (Exception e) {
       System.err.println(e);
@@ -90,7 +109,19 @@ public class IrisXEPClient extends DB {
   public Status scan(String table, String startkey, int recordcount,
       Set<String> fields, Vector<HashMap<String, ByteIterator>> result) {
     try {
-      System.out.println("Scan");
+      EventQueryIterator<Usertable> myIter = getIteratorScan(table, startkey, recordcount);
+      
+      for (int i = 0; i < recordcount && myIter.hasNext(); i++) {
+        if (result != null && fields != null) {
+          HashMap<String, ByteIterator> values = new HashMap<String, ByteIterator>();
+          for (String field : fields) {
+            String value = "todo";
+            values.put(field, new StringByteIterator(value));
+          }
+          result.add(values);
+        }
+      }
+      
       return Status.OK;
     } catch (Exception e) {
       System.err.println(e);
@@ -101,12 +132,7 @@ public class IrisXEPClient extends DB {
   public Status update(String table, String key, Map<String, ByteIterator> values) {
     try {
 
-      EventQueryIterator<Usertable> myIter = returnOneByKey(table, key);
-      
-      if (myIter.hasNext()) {
-        Usertable eventItems = new Usertable(key, values);
-        myIter.set(eventItems);
-      }
+      this.insert(table, key, values);
 
       return Status.OK;
     } catch (Exception e) {
@@ -118,8 +144,7 @@ public class IrisXEPClient extends DB {
   public Status insert(String table, String key, Map<String, ByteIterator> values) {
     try {
 
-      Usertable eventItems = new Usertable(key, values);
-      
+      Object eventItems = um.populate(c, key, values);
       event.store(eventItems);
 
       return Status.OK;
@@ -132,11 +157,12 @@ public class IrisXEPClient extends DB {
   public Status delete(String table, String key) {
     try {
       
-      EventQueryIterator<Usertable> myIter = returnOneByKey(table, key);
+      EventQueryIterator<Usertable> myIter = getIteratorByKey(table, key);
       
       if (myIter.hasNext()) {
         myIter.remove();
       }
+      
       return Status.OK;
     } catch (Exception e) {
       System.err.println(e);
@@ -144,23 +170,19 @@ public class IrisXEPClient extends DB {
     }
   }
   
-  private EventQueryIterator<Usertable> returnOneByKey(String table, String key){
-
-    StringBuilder read = new StringBuilder("SELECT * FROM ");
-    read.append("com_yahoo_ycsb_db.Usertable ");
-    read.append(" WHERE ");
-    read.append(" key ");
-    read.append(" = ");
-    read.append("?");
+  private EventQueryIterator<Usertable> getIteratorByKey(String table, String key){
 
     try {
 
-      event = this.xepPersister.getEvent("com.yahoo.ycsb.db.Usertable");
+      String sql = " SELECT * FROM "+table+" WHERE "+key+" >= ? ";
+
       
-      EventQuery<Usertable> myQuery = event.createQuery(" SELECT * FROM com_yahoo_ycsb_db.Usertable WHERE key = ? ");
-     
+      myQuery = event.createQuery(sql);
+
+
       myQuery.setParameter(1, key); 
       myQuery.execute();
+     
       
       return myQuery.getIterator();
     
@@ -168,9 +190,32 @@ public class IrisXEPClient extends DB {
       System.err.println(e);
       return null;
     }
-    
-    
+  }
+  
+  private EventQueryIterator<Usertable> getIteratorScan(String table, String key, int recordcount){
 
+    try {
+
+      String sql = " SELECT top ? * FROM "+table+" WHERE "+key+" >= ? ";
+
+      if (myQueryScan == null) {
+        myQueryScan = event.createQuery(sql);
+      }
+
+      myQueryScan.setParameter(1, recordcount);
+      myQueryScan.setParameter(2, key); 
+      myQueryScan.execute();
+      
+      EventQueryIterator<Usertable> tmp = myQueryScan.getIterator();
+      
+      myQueryScan.close();
+      
+      return tmp;
+    
+    } catch (Exception e) {
+      System.err.println(e);
+      return null;
+    }
   }
 
 }
