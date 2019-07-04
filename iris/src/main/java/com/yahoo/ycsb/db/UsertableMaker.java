@@ -9,12 +9,6 @@ import javassist.CannotCompileException;
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.CtField;
-import javassist.NotFoundException;
-import javassist.bytecode.AnnotationsAttribute;
-import javassist.bytecode.ClassFile;
-import javassist.bytecode.ConstPool;
-import javassist.bytecode.annotation.Annotation;
-import javassist.bytecode.annotation.BooleanMemberValue;
 
 
 /**
@@ -63,52 +57,41 @@ public final class UsertableMaker {
     // get default pool to build the new class
     ClassPool pool = ClassPool.getDefault();
     
-    // import needed package
-    pool.importPackage("java.lang");
-    pool.importPackage("com.intersystems.xep.annotations.Id");
+    String dynaClass = "com.yahoo.ycsb.db."+table;
+    String staticClass = "com.yahoo.ycsb.db.Usertable";
+    
+    CtClass clazz = null;
+
     
     try {
+
+      // get or rename the class 
+      if (staticClass.equals(dynaClass)) {
+        throw new CannotCompileException("Dynamic class can't have the same name as static class");
+      } else {
+        clazz = pool.getAndRename(staticClass, dynaClass);
+      }
       
       //prepare the type string field
       CtClass string = pool.getCtClass("java.lang.String");
-      
-      String newClass = "com.yahoo.ycsb.db."+table;
-      
-      CtClass clazz = null;
-      // get or create the class 
-      if (pool.getOrNull(newClass) != null) {
-      	clazz = pool.get(newClass);
+
+      // Purge fields from Static UserTable
+      for (int i=0; i < 10; i++) {
+        clazz.removeField(clazz.getField("field"+i));
       }
-      else {
-        clazz = pool.makeClass(newClass);
-      }
+      clazz.removeField(clazz.getField("key"));
       
       //create fieldscount fields name fieldX of type string
       for(int i=0; i < fieldscount; i++) {
-        try {
-        	clazz.getField("field"+i);
-        } catch (NotFoundException e) { 
-      	  CtField f = new CtField(string, "field"+i, clazz);
-          clazz.addField(f);
-        }
+        CtField f = new CtField(string, "field"+i, clazz);
+        clazz.addField(f);
       }
-
-      //get the ConstPool for the key field
-      ClassFile cfile = clazz.getClassFile();
-      ConstPool cpool = cfile.getConstPool();
-
-      //create the annotation Id for the key field
-      //this is to make key the primary key of the event to persist in Iris
-      AnnotationsAttribute attr = new AnnotationsAttribute(cpool, AnnotationsAttribute.visibleTag);
-      Annotation annot = new Annotation("com.intersystems.xep.annotations.Id", cpool);
-      annot.addMemberValue("generated", new BooleanMemberValue(cpool));
-      attr.addAnnotation(annot);
       
       //add key field to class
       CtField fk = new CtField(string, keyname, clazz); 
-      fk.getFieldInfo().addAttribute(attr);
       clazz.addField(fk);
       
+
       //generate class
       c = clazz.toClass();
      

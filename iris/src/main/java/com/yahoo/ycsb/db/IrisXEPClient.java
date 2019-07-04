@@ -117,13 +117,15 @@ public class IrisXEPClient extends DB {
       int port = getIntProperty(props, CONNECTION_PORT, 51773);
       
       boolean dynaclass = getBoolProperty(props, PARAM_DB_DYNACLASS, true);
-      tablename = props.getProperty(PARAM_TABLE, "Usertable");
-      keyname = props.getProperty(PARAM_KEYNAME, PARAM_KEYNAME);
-      fieldscount = getIntProperty(props, PARAM_FIELDCOUNT, 10);
-
-
-
-      
+      if (dynaclass) {
+        tablename = props.getProperty(PARAM_TABLE, "UsertableDyna");
+        keyname = props.getProperty(PARAM_KEYNAME, PARAM_KEYNAME);
+        if (!keyname.equals("key")) {
+          throw new DBException("new key name not yet supported");
+        }
+        fieldscount = getIntProperty(props, PARAM_FIELDCOUNT, 10);
+      }
+   
       INIT_LOCK.lock();
       
       um = UsertableMaker.getInstance(tablename, keyname, fieldscount);

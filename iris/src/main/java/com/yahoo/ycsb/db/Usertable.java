@@ -1,12 +1,7 @@
 package com.yahoo.ycsb.db;
 
-import java.lang.reflect.Field;
-import java.util.Map;
-
-
 import com.intersystems.xep.annotations.Index;
 import com.intersystems.xep.annotations.IndexType;
-import com.yahoo.ycsb.ByteIterator;
 
 /**
  * A class that wraps a JDBC compliant database to allow it to be interfaced
@@ -39,21 +34,4 @@ public class Usertable {
 
   public Usertable() {}
 
-  public Usertable(String key, Map<String, ByteIterator> values) {
-    
-    this.key=key;
-    
-    for (Map.Entry<String, ByteIterator> value : values.entrySet()) {
-      try {
-        Field field = this.getClass().getDeclaredField(value.getKey());
-        String tValue = value.getValue().toString();
-        field.setAccessible(true);
-        field.set(this, tValue);
-
-      } catch (Exception e) {
-        e.printStackTrace();
-      }
-    }
-
-  }
 }
