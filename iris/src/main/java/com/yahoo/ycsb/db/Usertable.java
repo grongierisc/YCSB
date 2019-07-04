@@ -3,8 +3,9 @@ package com.yahoo.ycsb.db;
 import java.lang.reflect.Field;
 import java.util.Map;
 
-import com.intersystems.xep.annotations.Id;
 
+import com.intersystems.xep.annotations.Index;
+import com.intersystems.xep.annotations.IndexType;
 import com.yahoo.ycsb.ByteIterator;
 
 /**
@@ -21,9 +22,9 @@ import com.yahoo.ycsb.ByteIterator;
  * attributes are of type TEXT. All accesses are through the primary key.
  * Therefore, only one index on the primary key is needed.
  */
-
+@Index(name="indexOne", fields={"key"}, type=IndexType.bitmap)
 public class Usertable {
-  @Id(generated=false)
+  
   private String key;
   private String field0;
   private String field1;

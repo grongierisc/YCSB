@@ -26,10 +26,14 @@ import com.yahoo.ycsb.StringByteIterator;
 
 import com.intersystems.xep.*;
 
+import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 import java.util.Vector;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 
 /**
@@ -37,8 +41,37 @@ import java.util.Vector;
  */
 public class IrisXEPClient extends DB {
 
-  private static final String COM_YAHOO_YCSB_DB_USERTABLE_TABLE = "com_yahoo_ycsb_db.Usertable";
-  private static final String COM_YAHOO_YCSB_DB_USERTABLE_CLASS = "com.yahoo.ycsb.db.Usertable";
+  private static final String PARAM_KEYNAME = "key";
+
+  private static final String PARAM_TABLE = "table";
+
+  private static final String PARAM_FIELDCOUNT = "fieldcount";
+  
+  private static final String PARAM_DB_DYNACLASS = "db.dynaclass";
+
+  private static final Lock INIT_LOCK = new ReentrantLock();
+
+  /** The URL to connect to the database. */
+  public static final String CONNECTION_URL = "db.url";
+  
+  /** The port to connect to the database. */
+  public static final String CONNECTION_PORT = "db.port";
+
+  /** The namespace to connect to the database. */
+  public static final String CONNECTION_NAMESPACE = "db.namespace";
+  
+  /** The user name to use to connect to the database. */
+  public static final String CONNECTION_USER = "db.user";
+
+  /** The password to use for establishing the connection. */
+  public static final String CONNECTION_PASSWD = "db.passwd";
+  
+  public static final String DEFAULT_PROP = "";
+
+  private Properties props;
+  private String keyname = "key";
+  private String tablename = "usertable";
+  private int fieldscount = 10;
   private EventQuery<Usertable> myQuery;
   private EventQuery<Usertable> myQueryScan;
   private EventPersister xepPersister;
@@ -46,32 +79,71 @@ public class IrisXEPClient extends DB {
   private UsertableMaker um;
   private Class<?> c;
 
-  private boolean initialized = false;
+  
+  /** Returns parsed int value from the properties if set, otherwise returns defaultvalue. */
+  private static int getIntProperty(Properties props, String key, int defaultvalue) throws DBException {
+    String valueStr = props.getProperty(key);
+    if (valueStr != null) {
+      try {
+        return Integer.parseInt(valueStr);
+      } catch (NumberFormatException nfe) {
+        System.err.println("Invalid " + key + " specified: " + valueStr);
+        throw new DBException(nfe);
+      }
+    }
+    return defaultvalue;
+  }
+  
+  /** Returns parsed boolean value from the properties if set, otherwise returns defaultVal. */
+  private static boolean getBoolProperty(Properties props, String key, boolean defaultVal) {
+    String valueStr = props.getProperty(key);
+    if (valueStr != null) {
+      return Boolean.parseBoolean(valueStr);
+    }
+    return defaultVal;
+  }
 
   public IrisXEPClient() {}
 
   public void init() throws DBException {
     try {
-      if (initialized) {
-        System.err.println("Client connection already initialized.");
-        return;
-      }
       
-      um = new UsertableMaker("table", "key", 12);
-      c = um.make();
+      //Get properties
+      props = getProperties();
+      String urls = props.getProperty(CONNECTION_URL, "127.0.0.1");
+      String user = props.getProperty(CONNECTION_USER, "_system");
+      String passwd = props.getProperty(CONNECTION_PASSWD, "password");
+      String namespace = props.getProperty(CONNECTION_NAMESPACE, "USER");
+      int port = getIntProperty(props, CONNECTION_PORT, 51773);
       
-      xepPersister = PersisterFactory.createPersister();
-      xepPersister.connect("127.0.0.1", 51773, "User", "_SYSTEM", "password"); // connect to localhost
+      boolean dynaclass = getBoolProperty(props, PARAM_DB_DYNACLASS, true);
+      tablename = props.getProperty(PARAM_TABLE, "Usertable");
+      keyname = props.getProperty(PARAM_KEYNAME, PARAM_KEYNAME);
+      fieldscount = getIntProperty(props, PARAM_FIELDCOUNT, 10);
 
+
+
+      
+      INIT_LOCK.lock();
+      
+      um = UsertableMaker.getInstance(tablename, keyname, fieldscount);
+
+      c = um.get(dynaclass);
+
+      xepPersister = PersisterFactory.createPersister();
+      xepPersister.connect(urls, port, namespace, user, passwd); 
+      
+      
       String cano = c.getName().toString();
-      //if (!xepPersister.isSchemaUpToDate(c)) {
-      xepPersister.importSchema(cano);
-      //}
+      if (!xepPersister.isSchemaUpToDate(c)) {
+        xepPersister.importSchema(cano);
+      }
       event = xepPersister.getEvent(cano);
       
+      INIT_LOCK.unlock();
+     
+      
       System.out.println("Init");
-
-      initialized=true;
 
     } catch (Exception e) {
       System.out.println("Exception Init : " + e);
@@ -91,7 +163,7 @@ public class IrisXEPClient extends DB {
   public Status read(String table, String key, Set<String> fields, Map<String, ByteIterator> result) {
     try {
 
-      EventQueryIterator<Usertable> myIter = getIteratorByKey(table, key);
+      EventQueryIterator<Usertable> myIter = getIteratorByKey(tablename, key);
       
       if (!myIter.hasNext()) {
         return Status.ERROR;
@@ -109,13 +181,15 @@ public class IrisXEPClient extends DB {
   public Status scan(String table, String startkey, int recordcount,
       Set<String> fields, Vector<HashMap<String, ByteIterator>> result) {
     try {
-      EventQueryIterator<Usertable> myIter = getIteratorScan(table, startkey, recordcount);
+      EventQueryIterator<Usertable> myIter = getIteratorScan(tablename, startkey, recordcount);
       
       for (int i = 0; i < recordcount && myIter.hasNext(); i++) {
         if (result != null && fields != null) {
           HashMap<String, ByteIterator> values = new HashMap<String, ByteIterator>();
           for (String field : fields) {
-            String value = "todo";
+            Object usertable = myIter.next();
+            Field objectfield = usertable.getClass().getDeclaredField(field);
+            String value = (String) objectfield.get(usertable);
             values.put(field, new StringByteIterator(value));
           }
           result.add(values);
@@ -132,7 +206,7 @@ public class IrisXEPClient extends DB {
   public Status update(String table, String key, Map<String, ByteIterator> values) {
     try {
 
-      this.insert(table, key, values);
+      this.insert(tablename, key, values);
 
       return Status.OK;
     } catch (Exception e) {
@@ -157,7 +231,7 @@ public class IrisXEPClient extends DB {
   public Status delete(String table, String key) {
     try {
       
-      EventQueryIterator<Usertable> myIter = getIteratorByKey(table, key);
+      EventQueryIterator<Usertable> myIter = getIteratorByKey(tablename, key);
       
       if (myIter.hasNext()) {
         myIter.remove();
@@ -174,7 +248,7 @@ public class IrisXEPClient extends DB {
 
     try {
 
-      String sql = " SELECT * FROM "+table+" WHERE "+key+" >= ? ";
+      String sql = " SELECT * FROM com_yahoo_ycsb_db."+table+" WHERE "+keyname+"= ?";
 
       
       myQuery = event.createQuery(sql);
@@ -196,7 +270,7 @@ public class IrisXEPClient extends DB {
 
     try {
 
-      String sql = " SELECT top ? * FROM "+table+" WHERE "+key+" >= ? ";
+      String sql = " SELECT top ? * FROM com_yahoo_ycsb_db."+table+" WHERE "+keyname+"= ?";
 
       if (myQueryScan == null) {
         myQueryScan = event.createQuery(sql);
