@@ -86,6 +86,7 @@ DATABASES = {
     "hypertable"   : "com.yahoo.ycsb.db.HypertableClient",
     "ignite"       : "com.yahoo.ycsb.db.ignite.IgniteClient",
     "iris-xep"       : "com.yahoo.ycsb.db.IrisXEPClient",
+    "iris-native"       : "com.yahoo.ycsb.db.IrisNativeApiClient",
     "ignite-sql"   : "com.yahoo.ycsb.db.ignite.IgniteSqlClient",
     "infinispan-cs": "com.yahoo.ycsb.db.InfinispanRemoteClient",
     "infinispan"   : "com.yahoo.ycsb.db.InfinispanClient",
@@ -336,6 +337,7 @@ def main():
         ycsb_command.append(command)
     print >> sys.stderr, " ".join(ycsb_command)
     try:
+	debug(ycsb_command)
         return subprocess.call(ycsb_command)
     except OSError as e:
         if e.errno == errno.ENOENT:
