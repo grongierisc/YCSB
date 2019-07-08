@@ -29,32 +29,36 @@ LICENSE file.
   <artifactId>iris-binding</artifactId>
   <name>Iris DB Binding</name>
   <packaging>jar</packaging>
-  
-  <properties>
-    <javaassist.version>3.21.0-GA</javaassist.version>
-  </properties>
 
   <dependencies>
-    <dependency>
-      <groupId>com.intersystems</groupId>
-      <artifactId>intersystems-xep</artifactId>
-      <version>3.0.0</version>
-    </dependency>
-    <dependency>
-      <groupId>com.intersystems</groupId>
-      <artifactId>intersystems-jdbc</artifactId>
-      <version>3.0.0</version>
-    </dependency>
     <dependency>
       <groupId>com.yahoo.ycsb</groupId>
       <artifactId>core</artifactId>
       <version>${project.version}</version>
-      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.intersystems</groupId>
+      <artifactId>intersystems-xep</artifactId>
+      <version>${iris.version}</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/src/main/resources/intersystems-jdbc-3.0.0.jar</systemPath>
+    </dependency>
+    <dependency>
+      <groupId>com.intersystems</groupId>
+      <artifactId>intersystems-jdbc</artifactId>
+      <version>${iris.version}</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/src/main/resources/intersystems-xep-3.0.0.jar</systemPath>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.openjpa</groupId>
+      <artifactId>openjpa-jdbc</artifactId>
+      <version>${openjpa.jdbc.version}</version>
     </dependency>
     <dependency>
       <groupId>org.javassist</groupId>
       <artifactId>javassist</artifactId>
-      <version>${javaassist.version}</version>
+      <version>3.21.0-GA</version>
     </dependency>
   </dependencies>
 </project>
