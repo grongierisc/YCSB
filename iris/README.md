@@ -24,35 +24,41 @@ This section describes how to run YCSB on iris.
 ### 2. Set Up YCSB
 1. Git clone YCSB and compile:
   ```
-git clone http://github.com/brianfrankcooper/YCSB.git
+git clone https://github.com/grongierisc/YCSB
 cd YCSB
 mvn clean package
   ```
 
-2. Copy and untar YCSB distribution in distribution/target/ycsb-x.x.x.tar.gz to target machine
-
-### 4. Load data and run tests
-####4.1 embedded mode with cluster or not
+### 3. Load data and run tests
+####3.1 with JDBC
 Load the data:
 ```
-./bin/ycsb load iris -P workloads/workloada -p iris.clustered=<true or false>
+./bin/ycsb load jdbc -P  workloads/workloada -p recordcount=100000 -P jdbc/conf/iris_local.properties -cp jdbc/lib/intersystems-jdbc-3.0.0.jar -threads 4
 ```
 Run the workload test:
 ```
-./bin/ycsb run iris -s -P workloads/workloada -p iris.clustered=<true or false>
+./bin/ycsb run jdbc -P  workloads/workloada -p operationcount=100000 -P jdbc/conf/iris_local.properties -cp jdbc/lib/intersystems-jdbc-3.0.0.jar -threads 4
 ```
-####4.2 client-server mode
+####3.2 with XEP
     
-1. start iris server
-
-2. read [RemoteCacheManager](http://docs.jboss.org/iris/7.2/apidocs/org/iris/client/hotrod/RemoteCacheManager.html) doc and customize hotrod client properties in iris-binding/conf/remote-cache.properties
-
-3. Load the data with specified cache:
+1. Load the data with specified cache:
   ```
-./bin/ycsb load iris-cs -s -P workloads/workloada -P iris-binding/conf/remote-cache.properties -p cache=<cache name>
+./bin/ycsb load iris-xep -P workloads/workloada -p recordcount=100000 -P iris/conf/iris_local.properties -threads 4
   ```
 
-4. Run the workload test with specified cache:
+2. Run the workload test with specified cache:
   ```
-./bin/ycsb run iris-cs -s -P workloads/workloada -P iris-binding/conf/remote-cache.properties -p cache=<cache name>
+./bin/ycsb run iris-xep -P workloads/workloada -p operationcount=100000 -P iris/conf/iris_local.properties -threads 4
+  ```
+
+####3.3 with Java Native API
+
+1. Load the data with specified cache:
+  ```
+./bin/ycsb load iris-native -P workloads/workloada -p recordcount=100000 -P iris/conf/iris_local.properties -threads 4
+  ```
+
+2. Run the workload test with specified cache:
+  ```
+./bin/ycsb run iris-native -P workloads/workloada -p operationcount=100000 -P iris/conf/iris_local.properties -threads 4
   ```
