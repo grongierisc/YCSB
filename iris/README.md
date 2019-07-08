@@ -21,8 +21,17 @@ This section describes how to run YCSB on iris.
 
 ### 1. Install Java and Maven
 
+#### 1.1 Import Iris Jar to Maven
+For JBDC
+```
+mvn install:install-file -Dfile="jdbc/src/main/resources/intersystems-jdbc-3.0.0.jar" -DgroupId="com.intersystems" -DartifactId="intersystems-jdbc" -Dversion="3.0.0" -Dpackaging=jar
+```
+For XEP
+```
+mvn install:install-file -Dfile="jdbc/src/main/resources/intersystems-xep-3.0.0.jar" -DgroupId="com.intersystems" -DartifactId="intersystems-xep" -Dversion="3.0.0" -Dpackaging=jar
+```
 ### 2. Set Up YCSB
-1. Git clone YCSB and compile:
+Git clone YCSB and compile:
   ```
 git clone https://github.com/grongierisc/YCSB
 cd YCSB
@@ -33,32 +42,32 @@ mvn clean package
 ####3.1 with JDBC
 Load the data:
 ```
-./bin/ycsb load jdbc -P  workloads/workloada -p recordcount=100000 -P jdbc/conf/iris_local.properties -cp jdbc/lib/intersystems-jdbc-3.0.0.jar -threads 4
+./bin/ycsb load jdbc -P  workloads/workloada -p recordcount=100000 -P  jdbc/src/main/conf/iris_local.properties -cp  jdbc/src/main/resources/intersystems-jdbc-3.0.0.jar -threads 4
 ```
 Run the workload test:
 ```
-./bin/ycsb run jdbc -P  workloads/workloada -p operationcount=100000 -P jdbc/conf/iris_local.properties -cp jdbc/lib/intersystems-jdbc-3.0.0.jar -threads 4
+./bin/ycsb run jdbc -P  workloads/workloada -p operationcount=100000 -P jdbc/src/main/conf/iris_local.properties -cp  jdbc/src/main/resources/intersystems-jdbc-3.0.0.jar -threads 4
 ```
 ####3.2 with XEP
     
-1. Load the data with specified cache:
+1. Load the data :
   ```
-./bin/ycsb load iris-xep -P workloads/workloada -p recordcount=100000 -P iris/conf/iris_local.properties -threads 4
+./bin/ycsb load iris-xep -P workloads/workloada -p recordcount=100000 -P iris/src/main/conf/iris_local.properties -threads 4
   ```
 
-2. Run the workload test with specified cache:
+2. Run the workload :
   ```
-./bin/ycsb run iris-xep -P workloads/workloada -p operationcount=100000 -P iris/conf/iris_local.properties -threads 4
+./bin/ycsb run iris-xep -P workloads/workloada -p operationcount=100000 -P iris/src/main/conf/iris_local.properties -threads 4
   ```
 
 ####3.3 with Java Native API
 
-1. Load the data with specified cache:
+1. Load the data :
   ```
-./bin/ycsb load iris-native -P workloads/workloada -p recordcount=100000 -P iris/conf/iris_local.properties -threads 4
+./bin/ycsb load iris-native -P workloads/workloada -p recordcount=100000 -P iris/src/main/conf/iris_local.properties -threads 4
   ```
 
-2. Run the workload test with specified cache:
+2. Run the workload :
   ```
-./bin/ycsb run iris-native -P workloads/workloada -p operationcount=100000 -P iris/conf/iris_local.properties -threads 4
+./bin/ycsb run iris-native -P workloads/workloada -p operationcount=100000 -P iris/src/main/conf/iris_local.properties -threads 4
   ```
