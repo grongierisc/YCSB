@@ -116,7 +116,7 @@ public class IrisXEPClient extends DB {
       String namespace = props.getProperty(CONNECTION_NAMESPACE, "USER");
       int port = getIntProperty(props, CONNECTION_PORT, 51773);
       
-      boolean dynaclass = getBoolProperty(props, PARAM_DB_DYNACLASS, true);
+      boolean dynaclass = getBoolProperty(props, PARAM_DB_DYNACLASS, false);
       if (dynaclass) {
         tablename = props.getProperty(PARAM_TABLE, "UsertableDyna");
         keyname = props.getProperty(PARAM_KEYNAME, PARAM_KEYNAME);
