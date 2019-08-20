@@ -38,14 +38,14 @@ LICENSE file.
     </dependency>
     <dependency>
       <groupId>com.intersystems</groupId>
-      <artifactId>intersystems-xep</artifactId>
+      <artifactId>intersystems-jdbc</artifactId>
       <version>${iris.version}</version>
       <scope>system</scope>
       <systemPath>${project.basedir}/src/main/resources/intersystems-jdbc-3.0.0.jar</systemPath>
     </dependency>
     <dependency>
       <groupId>com.intersystems</groupId>
-      <artifactId>intersystems-jdbc</artifactId>
+      <artifactId>intersystems-xep</artifactId>
       <version>${iris.version}</version>
       <scope>system</scope>
       <systemPath>${project.basedir}/src/main/resources/intersystems-xep-3.0.0.jar</systemPath>
